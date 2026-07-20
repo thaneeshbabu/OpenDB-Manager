@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-main: 'Poppins', sans-serif;
+  --bg-dark: #0f172a;
+  --color-primary: #2563eb;
+  --color-secondary: #7c3aed;
+  --color-accent: #38bdf8;
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --text-white: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --radius-card: 20px;
+  --radius-input: 12px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 1. Animated Gradient Background Screen Wrapper */
+.login-screen-wrapper {
+  font-family: var(--font-main);
+  background: linear-gradient(-45deg, var(--bg-dark), #1e1b4b, var(--color-secondary), var(--color-primary));
+  background-size: 400% 400%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  animation: gradientShift 15s ease infinite, pageFadeIn 0.8s ease-out;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Floating Glowing Decorative Blobs */
+.background-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.blob-one {
+  width: 400px;
+  height: 400px;
+  background: var(--color-primary);
+  top: -10%;
+  left: -10%;
+  animation: floatOrbOne 20s infinite alternate ease-in-out;
+}
+
+.blob-two {
+  width: 500px;
+  height: 500px;
+  background: var(--color-secondary);
+  bottom: -15%;
+  right: -10%;
+  animation: floatOrbTwo 25s infinite alternate ease-in-out;
+}
+
+.blob-three {
+  width: 300px;
+  height: 300px;
+  background: var(--color-accent);
+  top: 40%;
+  left: 70%;
+  animation: floatOrbOne 18s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes floatOrbOne {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, 50px) scale(1.15); }
+}
+
+@keyframes floatOrbTwo {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-100px, -6px) scale(0.9); }
+}
+
+/* 2. Glassmorphic Central Card Layout Container */
+.login-card-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-card);
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  transition: var(--transition-smooth);
+}
+
+.login-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* 3. Logo & Title Brand Framework */
+.brand-identity-block {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.brand-icon-node {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
+}
+
+.brand-identity-block h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.brand-identity-block p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* 4. Input Fields Wrapper Engine */
+.login-form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-field-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-left, .input-icon-right {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.1rem;
+  transition: var(--transition-smooth);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.input-icon-left {
+  left: 16px;
+}
+
+.input-icon-right {
+  right: 16px;
+  pointer-events: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-right:hover {
+  color: var(--color-accent);
+}
+
+.form-input-control {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-input);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--text-white);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+/* Passwords tracking adjustments when toggle icon is visible */
+.form-input-control[type="password"],
+.form-input-control[type="text"].password-field {
+  padding-right: 48px;
+}
+
+/* Floating Label Logic via CSS Tracker */
+.input-field-group label {
+  position: absolute;
+  left: 48px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: var(--transition-smooth);
+  font-size: 0.95rem;
+}
+
+/* Structural mapping for placeholder-in-view logic tracking */
+.form-input-control:focus ~ label,
+.form-input-control:not(:placeholder-shown) ~ label {
+  transform: translateY(-34px) translateX(-32px) scale(0.85);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.form-input-control:focus {
+  border-color: var(--color-primary);
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+}
+
+.form-input-control:focus ~ .input-icon-left {
+  color: var(--color-accent);
+}
+
+/* 6. Extra Auxiliary Feature Rows */
+.form-auxiliary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.remember-me-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.remember-me-checkbox-label input {
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+
+.forgot-password-anchor, .navigation-footer-block a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.forgot-password-anchor:hover, .navigation-footer-block a:hover {
+  text-decoration: underline;
+  filter: brightness(1.2);
+}
+
+/* 5. Enterprise Premium Gradient Form Trigger Button */
+.btn-submit-action {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius-input);
+  background: linear-gradient(90deg, var(--color-primary), #3b82f6);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+  background: linear-gradient(90deg, #1d4ed8, #2563eb);
+}
+
+.btn-submit-action:active {
+  transform: translateY(0);
+}
+
+/* Native Loading Spinner Processing State Markup */
+.loading-spinner-element {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--text-white);
+  animation: spinnerRotate 0.6s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Separation Rules */
+.divider-line-break {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  margin: 8px 0;
+}
+
+/* Footer Section Navigation Link */
+.navigation-footer-block {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Tablet & Mobile Dynamic Media Queries Viewport Logic */
+@media (max-width: 480px) {
+  .login-card-container {
+    padding: 30px 20px;
+  }
+  
+  .brand-identity-block h1 {
+    font-size: 1.5rem;
+  }
+  
+  .form-auxiliary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

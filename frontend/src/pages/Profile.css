@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-surface: #f5f7fb;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --primary-accent: #2563eb;
+  --primary-gradient: linear-gradient(135deg, #1e3a8a, #2563eb);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --white: #ffffff;
+  --glass-card-bg: rgba(255, 255, 255, 0.85);
+  --glass-card-border: rgba(255, 255, 255, 0.6);
+  --shadow-normal: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  --shadow-premium: 0 20px 35px -8px rgba(37, 99, 235, 0.12), 0 12px 16px -8px rgba(0, 0, 0, 0.04);
+  --radius-standard: 18px;
+  --transition-elastic: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-page-wrapper {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 40px;
+  animation: profileFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes profileFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Header Architecture */
+.profile-view-header {
+  margin-bottom: 36px;
+}
+
+.profile-view-header h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.profile-view-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Structural Master Layout Grid */
+.profile-layout-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* 6. White Glass Card Common Framework */
+.glass-panel-card {
+  background: var(--glass-card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-card-border);
+  border-radius: var(--radius-standard);
+  padding: 30px;
+  box-shadow: var(--shadow-normal);
+  transition: var(--transition-elastic);
+}
+
+.glass-panel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-premium);
+}
+
+/* 3. Hero Profile Card Layout Details */
+.hero-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-upload-shell {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 20px;
+}
+
+.avatar-image-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--white);
+  box-shadow: var(--shadow-normal);
+}
+
+.avatar-badge-pill {
+  position: absolute;
+  bottom: 0;
+  right: 4px;
+  background: var(--primary-accent);
+  color: var(--white);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-normal);
+}
+
+.profile-identity-info h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.profile-identity-info .user-email-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* 8. Enterprise Role Badge & Status Indicators */
+.role-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-accent);
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.status-row-indicator {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.status-active-tag {
+  color: var(--success-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 8. Profile Completion Tracker Progress Bar */
+.completion-progress-block {
+  width: 100%;
+  margin: 24px 0 8px;
+}
+
+.progress-label-flex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.progress-track-rail {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, var(--primary-accent));
+  border-radius: 10px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Main Core Content Grid Layout Engine */
+.main-profile-content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.info-cards-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.section-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.section-title-wrapper svg {
+  color: var(--primary-accent);
+  font-size: 1.25rem;
+}
+
+/* 4. Individual Information Elements Row Structure */
+.data-attribute-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.data-attribute-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attribute-label-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.attribute-value-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* 5. Gradient Profile Management Action Group System Buttons */
+.profile-actions-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.action-btn-node {
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-elastic);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.action-btn-node.btn-gradient {
+  background: var(--primary-gradient);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.action-btn-node.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  filter: brightness(1.08);
+}
+
+.action-btn-node.btn-secondary {
+  background: var(--white);
+  color: var(--text-main);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.action-btn-node.btn-secondary:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.action-btn-node.btn-danger {
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+}
+
+.action-btn-node.btn-danger:hover {
+  background: #ef4444;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.2);
+}
+
+/* 8. Recent Activity Component Rows */
+.recent-activity-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.timeline-event-row {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.timeline-event-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: -16px;
+  width: 2px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.timeline-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid rgba(37, 99, 235, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-accent);
+  font-size: 0.95rem;
+  z-index: 2;
+}
+
+.timeline-log-details {
+  flex: 1;
+}
+
+.timeline-log-details h4 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.timeline-log-details p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* 8. Security Status Configuration Module Layout */
+.security-metric-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.security-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  border-radius: 12px;
+  font-size: 0.88rem;
+}
+
+.security-badge-card svg {
+  font-size: 1.5rem;
+  color: var(--success-color);
+}
+
+/* Mobile & Tablet Adaptive Responsive Breakpoints Engine */
+@media (max-width: 1100px) {
+  .profile-layout-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-profile-card {
+    flex-direction: row;
+    text-align: left;
+    gap: 30px;
+    align-items: center;
+  }
+  
+  .avatar-upload-shell {
+    margin-bottom: 0;
+  }
+  
+  .status-row-indicator {
+    width: auto;
+    border-top: none;
+    padding-top: 0;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-page-wrapper {
+    padding: 24px;
+  }
+  
+  .hero-profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .info-cards-subgrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-actions-toolbar {
+    flex-direction: column;
+  }
+  
+  .action-btn-node {
+    width: 100%;
+    justify-content: center;
+  }
+}
