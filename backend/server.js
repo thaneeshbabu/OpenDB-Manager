@@ -10,6 +10,7 @@ const userRoutes = require("./routes/userRoutes");
 const recordRoutes = require("./routes/recordRoutes");
 
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const uploadRoutes = require("./routes/upload");
 
 
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/records", recordRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
