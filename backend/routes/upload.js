@@ -60,6 +60,7 @@ router.post("/", upload.single("file"), async (req, res) => {
 
           res.json({
             success: true,
+             totalRecords: results.length,
             message: `${results.length} records imported successfully`,
           });
         } catch (err) {

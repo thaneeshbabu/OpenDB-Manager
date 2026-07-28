@@ -18,9 +18,7 @@ function Upload() {
       
       const res = await api.post("/upload", formData);
 
-      setMessage(
-        `Successfully uploaded ${res.data.totalRecords} records`
-      );
+      setMessage(res.data.message);
     }
     catch (err) {
   console.error(err);
