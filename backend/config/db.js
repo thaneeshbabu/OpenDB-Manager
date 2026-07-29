@@ -1,22 +1,22 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
-console.log("__dirname:", __dirname);
-console.log("cwd:", process.cwd());
-
-console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
-console.log(
-  "DATABASE_URL starts with:",
-  process.env.DATABASE_URL
-    ? process.env.DATABASE_URL.substring(0, 25)
-    : "undefined"
-);
-
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
+
+pool.query(
+  "SELECT current_database(), current_user, version()",
+  (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Connected DB:", result.rows[0]);
+    }
+  }
+);
 
 module.exports = pool;

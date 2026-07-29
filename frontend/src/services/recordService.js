@@ -1,10 +1,10 @@
 import api from "./api";
 
-// Get all records
+// Get uploaded NSE data
 export const getRecords = async () => {
   const token = localStorage.getItem("token");
 
-  const response = await api.get("/records", {
+  const response = await api.get("/nse-data", {
     headers: {
       Authorization: token,
     },
@@ -13,24 +13,16 @@ export const getRecords = async () => {
   return response.data;
 };
 
-// Create a new record
-export const createRecord = async (recordData) => {
-  const token = localStorage.getItem("token");
-
-  const response = await api.post("/records", recordData, {
-    headers: {
-      Authorization: token,
-    },
-  });
-
-  return response.data;
+// Create Record (Not used because data comes from CSV upload)
+export const createRecord = async () => {
+  return null;
 };
 
-// Update Record
+// Update uploaded row
 export const updateRecord = async (id, recordData) => {
   const token = localStorage.getItem("token");
 
-  const response = await api.put(`/records/${id}`, recordData, {
+  const response = await api.put(`/nse-data/${id}`, recordData, {
     headers: {
       Authorization: token,
     },
@@ -39,13 +31,11 @@ export const updateRecord = async (id, recordData) => {
   return response.data;
 };
 
-
-
-// Delete Record
+// Delete uploaded row
 export const deleteRecord = async (id) => {
   const token = localStorage.getItem("token");
 
-  const response = await api.delete(`/records/${id}`, {
+  const response = await api.delete(`/nse-data/${id}`, {
     headers: {
       Authorization: token,
     },

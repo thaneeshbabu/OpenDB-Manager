@@ -15,7 +15,7 @@ const role = storedUser?.role;
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 25;
 
   // Custom Form State
   const [formData, setFormData] = useState({
@@ -97,9 +97,10 @@ const role = storedUser?.role;
   };
 
   // Filter and Pagination Computations
-  const filteredRecords = records.filter((record) =>
-    record.title?.toLowerCase().includes(search.toLowerCase())
-  );
+      const filteredRecords = records.filter((record) =>
+  record.symbol?.toLowerCase().includes(search.toLowerCase())
+);
+
 
   const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);
   const displayedRecords = filteredRecords.slice(
@@ -253,55 +254,63 @@ const role = storedUser?.role;
           </div>
         ) : (
           <>
-            <div className="table-responsive-wrapper">
-              <table className="premium-data-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Created Date</th>
-                    <th style={{ textAlign: "center" }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {displayedRecords.map((record) => (
-                    <tr key={record.id}>
-                      <td><span className="badge-id"># {record.id}</span></td>
-                      <td className="text-strong">{record.title}</td>
-                      <td className="text-muted">{record.description}</td>
-                      <td><span className="badge-category">{record.category || "General"}</span></td>
-                      <td className="text-small">July 12, 2026</td>
-                      <td>
-                        <div className="action-button-cell">
-                         {role !== "Viewer" && (
-<button
- className="btn-action btn-edit"
- title="Edit Record"
- onClick={() => editRecord(record)}
->
-    </button>
-    )}
-                            <FiEdit />
-                       
-                          {role === "Admin" && (
-<button
- className="btn-action btn-delete"
- title="Delete Record"
- onClick={() => triggerDeleteConfirm(record.id)}
->
-    </button>
-                          )}
-                            <FiTrash2 />
-                         
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="table-responsive-wrapper">
+  <table className="premium-data-table">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Symbol</th>
+        <th>Series</th>
+        <th>Open</th>
+        <th>High</th>
+        <th>Low</th>
+        <th>Close</th>
+        <th style={{ textAlign: "center" }}>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {displayedRecords.map((record) => (
+        <tr key={record.id}>
+          <td><span className="badge-id">#{record.id}</span></td>
+          <td>{record.symbol}</td>
+          <td>{record.series}</td>
+          <td>{record.open_price}</td>
+          <td>{record.high_price}</td>
+          <td>{record.low_price}</td>
+          <td>{record.close_price}</td>
+
+          <td>
+            <div className="action-button-cell">
+
+              {role !== "Viewer" && (
+                <button
+                  className="btn-action btn-edit"
+                  onClick={() => editRecord(record)}
+                >
+                  <FiEdit />
+                </button>
+              )}
+
+              {role === "Admin" && (
+                <button
+                  className="btn-action btn-delete"
+                  onClick={() => triggerDeleteConfirm(record.id)}
+                >
+                  <FiTrash2 />
+                </button>
+              )}
+
             </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+
+  </table>
+</div>
+           
 
             {/* Pagination Controls Footer */}
             {totalPages > 1 && (
@@ -317,15 +326,27 @@ const role = storedUser?.role;
                   >
                     Previous
                   </button>
-                  {Array.from({ length: totalPages }, (_, idx) => (
-                    <button
-                      key={idx + 1}
-                      onClick={() => setCurrentPage(idx + 1)}
-                      className={`pagination-btn ${currentPage === idx + 1 ? "active" : ""}`}
-                    >
-                      {idx + 1}
-                    </button>
-                  ))}
+                {Array.from(
+  { length: Math.min(5, totalPages) },
+  (_, i) => {
+    const page =
+      Math.max(1, currentPage - 2) + i;
+
+    if (page > totalPages) return null;
+
+    return (
+      <button
+        key={page}
+        onClick={() => setCurrentPage(page)}
+        className={`pagination-btn ${
+          currentPage === page ? "active" : ""
+        }`}
+      >
+        {page}
+      </button>
+    );
+  }
+)}
                   <button 
                     disabled={currentPage === totalPages} 
                     onClick={() => setCurrentPage(prev => prev + 1)}
